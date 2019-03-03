@@ -31,4 +31,13 @@ public class CalcylatorTest{
         assertEquals(1d, actual, 0.111);
     }
 
+    @Test
+    public void StringOfTwoGivesDoubleTwo(){
+        Calcylator calc = new Calcylator();
+        String input = "2";
+        double actual = calc.calculateExpression(input);
+        assertEquals(2d, actual, 0.111);
+    }
+
+
 }
