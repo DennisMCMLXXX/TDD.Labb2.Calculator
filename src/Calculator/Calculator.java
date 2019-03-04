@@ -7,8 +7,7 @@ public class Calculator {
             return addition(input);
         }
         if(input.contains("-")) {
-        	String[] components = input.split("[-]");
-        	return calculateExpression(components[0])-calculateExpression(components[1]);
+        	return subtraction(input);
         }
 
         if(input.contains("*")){
@@ -22,7 +21,12 @@ public class Calculator {
     return Double.NaN;
     }
 
-    private double addition(String input){
+    private double subtraction(String input) {
+    	String[] components = input.split("[-]");
+    	return calculateExpression(components[0]) - calculateExpression(components[1]);
+	}
+
+	private double addition(String input){
         String[] components = input.split("[+]");
         double total = 0.0;
 
@@ -34,10 +38,10 @@ public class Calculator {
     
     private double multiply(String input) {
     	String[] components = input.split("[*]");
-    	double total = 0.0;
+    	double total = Double.parseDouble(components[0]);
     	
     	for(String component: components) {
-    		total += calculateExpression(component);
+    		total *= calculateExpression(component);
     	}
     	return total;
     }

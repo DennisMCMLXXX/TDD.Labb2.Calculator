@@ -54,8 +54,8 @@ public class CalculatorTest{
     }
 
     @Test
-    public void multiplyTwoTimesTwoEqualsFour(){
-        String input = "2*2";
+    public void multiplyTwoTimesFourEqualsEight(){
+        String input = "2*4";
         double actual = calc.calculateExpression(input);
         assertEquals(4d, actual, DELTA);
     }
@@ -63,6 +63,13 @@ public class CalculatorTest{
     @Test
     public void subtractionTwoMinusOneEqualsOne() {
     	String input = "2-1";
+    	double actual = calc.calculateExpression(input);
+    	assertEquals (1d, actual, DELTA);
+    }
+    
+    @Test
+    public void subtractionThreeMinusOneMinusOneEqualsOne() {
+    	String input = "3-1-1";
     	double actual = calc.calculateExpression(input);
     	assertEquals (1d, actual, DELTA);
     }
