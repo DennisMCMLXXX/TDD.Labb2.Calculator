@@ -48,7 +48,6 @@ public class Calculator {
         
         for(String component : components) {
             total += calculateExpression(component);
-            System.out.println("in addition" +component);
         }
         return total;
     }
@@ -59,9 +58,7 @@ public class Calculator {
     	double total = 1.0;
     	
     	for(String component : components) {
-    		//System.out.println(component);
     		total *= calculateExpression(component);
-    		System.out.println("m"+total);
 
     	}
     	return total;
