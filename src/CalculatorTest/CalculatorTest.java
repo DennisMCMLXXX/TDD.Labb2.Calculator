@@ -1,20 +1,20 @@
-package CalcylatorTest;
+package CalculatorTest;
 
-import Calcylator.Calcylator;
+import Calculator.Calculator;
 import org.junit.*;
 
 
 import static org.junit.Assert.assertEquals;
 
-public class CalcylatorTest{
+public class CalculatorTest{
 
     private static final double DELTA = 0.111;
 
-    Calcylator calc;
+    Calculator calc;
 
     @Before
     public void beforeEachTest() {
-        calc = new Calcylator();
+        calc = new Calculator();
     }
 
     @Ignore
@@ -46,4 +46,17 @@ public class CalcylatorTest{
         assertEquals(2d, acutal, DELTA);
     }
 
+    @Test
+    public void additionOnePlusOnePlusOneEqualsThree(){
+        String input = "1+1+1";
+        double actual = calc.calculateExpression(input);
+        assertEquals(3d, actual, DELTA);
+    }
+
+    @Test
+    public void multiplyTwoTimesTwoEqualsFour(){
+        String input = "2*2";
+        double actual = calc.calculateExpression(input);
+        assertEquals(4d, actual, DELTA);
+    }
 }
