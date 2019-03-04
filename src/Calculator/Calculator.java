@@ -38,11 +38,6 @@ public class Calculator {
     
     private double multiply(String input) {
     	String[] components = input.split("[*]");
-    	double total = Double.parseDouble(components[0]);
-    	
-    	for(String component: components) {
-    		total *= calculateExpression(component);
-    	}
-    	return total;
+    	return calculateExpression(components[0]) * calculateExpression(components[1]);
     }
 }

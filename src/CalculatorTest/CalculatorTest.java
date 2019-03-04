@@ -57,7 +57,7 @@ public class CalculatorTest{
     public void multiplyTwoTimesFourEqualsEight(){
         String input = "2*4";
         double actual = calc.calculateExpression(input);
-        assertEquals(4d, actual, DELTA);
+        assertEquals(8d, actual, DELTA);
     }
     
     @Test
