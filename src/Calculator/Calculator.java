@@ -23,17 +23,32 @@ public class Calculator {
 
     private double subtraction(String input) {
     	String[] components = input.split("[-]");
-    	double total = Double.parseDouble(components[0]);
-		total -= calculateExpression(components[0]) - calculateExpression(components[1]);
-    return total;
+    	// System.out.println("s"+components[0]);
+    	//System.out.println("afterparse"+total);
+    	//double total = (Double.parseDouble(components[0]) + Double.parseDouble(components[0]));
+    	//double total = Double.parseDouble(components[0]);
+    	//System.out.println("sub"+total);
+		//total -= calculateExpression(components[0]) - calculateExpression(components[1]);
+		 /*for(String component : components) {
+
+	         System.out.println("comp"+component);  
+			 //total -= calculateExpression(component);
+	 		total -= calculateExpression(components[0]) - calculateExpression(components[1]);
+
+	              System.out.println("subi"+total);
+	              return total;
+		 }*/
+		
+		return calculateExpression(components[0]) - calculateExpression(components[1]);
 }
 
 	private double addition(String input){
         String[] components = input.split("[+]");
         double total = 0.0;
-
+        
         for(String component : components) {
             total += calculateExpression(component);
+            System.out.println("in addition" +component);
         }
         return total;
     }
@@ -44,7 +59,10 @@ public class Calculator {
     	double total = 1.0;
     	
     	for(String component : components) {
+    		//System.out.println(component);
     		total *= calculateExpression(component);
+    		System.out.println("m"+total);
+
     	}
     	return total;
     }
