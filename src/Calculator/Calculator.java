@@ -23,21 +23,8 @@ public class Calculator {
 
     private double subtraction(String input) {
     	String[] components = input.split("[-]");
-    	//return calculateExpression(components[0]) - calculateExpression(components[1]);
     	double total = Double.parseDouble(components[0]);
-    	
 		total -= calculateExpression(components[0]) - calculateExpression(components[1]);
-
-    	
-    	
-    	// System.out.println(components[0]);
-    	/*
-    for(String component : components) {
-    		total -= calculateExpression(components[0]) - calculateExpression(components[1]);
-    		   // System.out.println(total);
-    		   return total;
-    	}*/
-   
     return total;
 }
 
