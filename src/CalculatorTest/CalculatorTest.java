@@ -66,7 +66,7 @@ public class CalculatorTest{
     	double actual = calc.calculateExpression(input);
     	assertEquals (1d, actual, DELTA);
     }
-    @Ignore //Denna får jag inte till!
+    // @Ignore //Denna får jag inte till!
     @Test
     public void subtractionThreeMinusOneMinusOneEqualsOne() {
     	String input = "3-1-1";
@@ -74,7 +74,12 @@ public class CalculatorTest{
     	assertEquals (1d, actual, DELTA);
     }
     
-    
+    @Test
+    public void divisionSixDividedByTwoEqualsThree() {
+    	String input = "6/2";
+    	double actual = calc.calculateExpression(input);
+    	assertEquals (3d, actual, DELTA);
+    }
     
     @Test
     public void testAdditionMultiplyInRinghtOrder(){

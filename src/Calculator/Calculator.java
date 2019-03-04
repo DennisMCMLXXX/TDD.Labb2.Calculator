@@ -9,7 +9,10 @@ public class Calculator {
         if(input.contains("-")) {
         	return subtraction(input);
         }
-
+        if(input.contains("/")) {
+        	String[] components = input.split("[/]");
+        	return calculateExpression(components[0]) / calculateExpression(components[1]);
+        }
         if(input.contains("*")){
             return multiply(input);
         }
@@ -23,23 +26,14 @@ public class Calculator {
 
     private double subtraction(String input) {
     	String[] components = input.split("[-]");
-    	// System.out.println("s"+components[0]);
-    	//System.out.println("afterparse"+total);
-    	//double total = (Double.parseDouble(components[0]) + Double.parseDouble(components[0]));
-    	//double total = Double.parseDouble(components[0]);
-    	//System.out.println("sub"+total);
-		//total -= calculateExpression(components[0]) - calculateExpression(components[1]);
-		 /*for(String component : components) {
-
-	         System.out.println("comp"+component);  
-			 //total -= calculateExpression(component);
-	 		total -= calculateExpression(components[0]) - calculateExpression(components[1]);
-
-	              System.out.println("subi"+total);
-	              return total;
-		 }*/
+   
+    	 double total = Double.parseDouble(components[0]) + Double.parseDouble(components[0]);
+         
+         for(String component : components) {
+             total -= calculateExpression(component);
+         }
+         return total;
 		
-		return calculateExpression(components[0]) - calculateExpression(components[1]);
 }
 
 	private double addition(String input){
