@@ -66,7 +66,7 @@ public class CalculatorTest{
     	double actual  = calc.calculateExpression(input);
     	assertEquals(16d, actual, DELTA);
     }
-    
+
     @Test
     public void subtractionTwoMinusOneEqualsOne() {
     	String input = "2-1";
