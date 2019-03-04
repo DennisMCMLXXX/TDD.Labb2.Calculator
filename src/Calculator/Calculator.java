@@ -8,10 +8,9 @@ public class Calculator {
         }
 
         if(input.contains("*")){
-            String[] components = input.split("[*]");
-            return calculateExpression(components[0]) * calculateExpression(components[1]);
+            return multiply(input);
         }
-
+        
         if(input.matches("[0-9]+")) {
             return Double.parseDouble(input);
         }
@@ -26,7 +25,16 @@ public class Calculator {
         for(String component : components) {
             total += calculateExpression(component);
         }
-
         return total;
+    }
+    
+    private double multiply(String input) {
+    	String[] components = input.split("[*]");
+    	double total = 0.0;
+    	
+    	for(String component: components) {
+    		total += calculateExpression(component);
+    	}
+    	return total;
     }
 }
