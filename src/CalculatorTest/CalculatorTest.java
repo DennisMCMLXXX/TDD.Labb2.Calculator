@@ -40,7 +40,7 @@ public class CalculatorTest{
     }
 
     @Test
-    public void AdditionOnePlusOneEqualsTwo(){
+    public void additionOnePlusOneEqualsTwo(){
         String input = "1+1";
         double acutal = calc.calculateExpression(input);
         assertEquals(2d, acutal, DELTA);
@@ -58,5 +58,12 @@ public class CalculatorTest{
         String input = "2*2";
         double actual = calc.calculateExpression(input);
         assertEquals(4d, actual, DELTA);
+    }
+    
+    @Test
+    public void subtractionTwoMinusOneEqualsOne() {
+    	String input = "2-1";
+    	double actual = calc.calculateExpression(input);
+    	assertEquals (1d, actual, DELTA);
     }
 }

@@ -6,6 +6,10 @@ public class Calculator {
         if(input.contains("+")) {
             return addition(input);
         }
+        if(input.contains("-")) {
+        	String[] components = input.split("[-]");
+        	return calculateExpression(components[0])-calculateExpression(components[1]);
+        }
 
         if(input.contains("*")){
             return multiply(input);
