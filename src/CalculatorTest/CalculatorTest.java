@@ -61,6 +61,13 @@ public class CalculatorTest{
     }
     
     @Test
+    public void multiplyTwoTimesTwoTimesFourEqualsSixteen() {
+    	String input = "2*2*4";
+    	double actual  = calc.calculateExpression(input);
+    	assertEquals(16d, actual, DELTA);
+    }
+    
+    @Test
     public void subtractionTwoMinusOneEqualsOne() {
     	String input = "2-1";
     	double actual = calc.calculateExpression(input);

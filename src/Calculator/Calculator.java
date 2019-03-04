@@ -38,6 +38,12 @@ public class Calculator {
     
     private double multiply(String input) {
     	String[] components = input.split("[*]");
-    	return calculateExpression(components[0]) * calculateExpression(components[1]);
+    	//return calculateExpression(components[0]) * calculateExpression(components[1]);
+    	double total = 1.0;
+    	
+    	for(String component : components) {
+    		total *= calculateExpression(component);
+    	}
+    	return total;
     }
 }
