@@ -10,8 +10,7 @@ public class Calculator {
         	return subtraction(input);
         }
         if(input.contains("/")) {
-        	String[] components = input.split("[/]");
-        	return calculateExpression(components[0]) / calculateExpression(components[1]);
+        	return division(input);
         }
         if(input.contains("*")){
             return multiply(input);
@@ -24,7 +23,28 @@ public class Calculator {
     return Double.NaN;
     }
 
-    private double subtraction(String input) {
+    private double division(String input) {
+    	String[] components = input.split("[/]"); 
+    	return calculateExpression(components[0]) / calculateExpression(components[1]);
+    	/*
+    	double total = Double.parseDouble(components[0]);
+    	while(input.contains("/")){ 
+    	total /= Double.parseDouble((components[0])) / Double.parseDouble((components[1]));	
+    	System.out.println(total);
+    	}
+    	return total;
+    	
+   	 double total = Double.parseDouble(components[0]);
+        System.out.println(components[0]);
+        
+        for(String component : components) {
+            total /= calculateExpression(component) - Double.parseDouble(components[0]);
+            System.out.println("inside"+component);
+        }
+        return total; */
+	}
+
+	private double subtraction(String input) {
     	String[] components = input.split("[-]");
    
     	 double total = Double.parseDouble(components[0]) + Double.parseDouble(components[0]);

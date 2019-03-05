@@ -1,12 +1,15 @@
 package CalculatorTest;
 
 import Calculator.Calculator;
-import org.junit.*;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 
+import org.junit.*;
+import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
-
-public class CalculatorTest{
+@RunWith(JUnitParamsRunner.class)
+public class CalculatorEasyTests{
 
     private static final double DELTA = 0.111;
 
@@ -66,7 +69,7 @@ public class CalculatorTest{
     	double actual = calc.calculateExpression(input);
     	assertEquals (1d, actual, DELTA);
     }
-    // @Ignore //Denna får jag inte till!
+    
     @Test
     public void subtractionThreeMinusOneMinusOneEqualsOne() {
     	String input = "3-1-1";
@@ -82,8 +85,27 @@ public class CalculatorTest{
     }
     
     @Test
+    public void divisionTwentyByTwoByFiveEqualsTwo() {
+    	String input = "20/2/5";
+    	double actual = calc.calculateExpression(input);
+    	assertEquals (2d, actual, DELTA);
+    }
+    
+    @Ignore
+    @Test
+    @Parameters({
+    	"3,3,3,3,3,3"
+	})
+    public void featureTests(String a, String b, String c, String d, String e, double expected) {
+    	String input = a+"*"+b+"/"+c+"+"+d+"-"+e;
+    	double actual = calc.calculateExpression(input);
+    	assertEquals(expected, actual, DELTA);
+    	//fler asserts!
+    }
+    
+    @Test
     public void testAdditionMultiplyInRinghtOrder(){
-         String input = "4*5+3";
+        String input = "4*5+3";
         double actual = calc.calculateExpression(input);
         assertEquals(23d, actual, DELTA);
     }
@@ -93,6 +115,12 @@ public class CalculatorTest{
     	String input = "50-2*5";
     	double actual = calc.calculateExpression(input);
     	assertEquals(40d, actual, DELTA);
+    }
+    @Test
+    public void testDivisionSubtractionInRightOrder() {
+    	String input = "30-10/2";
+    	double actual = calc.calculateExpression(input);
+    	assertEquals(25d, actual, DELTA);
     }
 
     
