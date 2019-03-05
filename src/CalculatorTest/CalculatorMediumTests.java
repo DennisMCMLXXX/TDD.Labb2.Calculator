@@ -22,8 +22,8 @@ public class CalculatorMediumTests {
 	 @Test
 		public void test() {
 			String input = "2*3*4*5";
-			double actual = calc.calculateExpression(input);
-			assertEquals(120d,actual, DELTA);
+			String actual = calc.calculateExpression(input);
+			assertEquals("120.0",actual, DELTA);
 			
 		}
 }

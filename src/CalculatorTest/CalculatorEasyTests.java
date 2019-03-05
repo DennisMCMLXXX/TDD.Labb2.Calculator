@@ -11,8 +11,6 @@ import static org.junit.Assert.assertEquals;
 @RunWith(JUnitParamsRunner.class)
 public class CalculatorEasyTests{
 
-    private static final double DELTA = 0.111;
-
     Calculator calc;
 
     @Before
@@ -24,71 +22,71 @@ public class CalculatorEasyTests{
     @Test
     public void StringOfOneToDoubleOne(){
         String input = "1";
-        double actual = calc.calculateExpression(input);
-        assertEquals(1d, actual, DELTA);
+        String actual = calc.calculateExpression(input);
+        assertEquals("1", actual);
     }
 
     @Test
     public void StringOfTwoGivesDoubleTwo(){
         String input = "2";
-        double actual = calc.calculateExpression(input);
-        assertEquals(2d, actual, DELTA);
+        String actual = calc.calculateExpression(input);
+        assertEquals("2", actual);
     }
 
     @Test
     public void additionOnePlusOneEqualsTwo(){
         String input = "1+1";
-        double acutal = calc.calculateExpression(input);
-        assertEquals(2d, acutal, DELTA);
+        String acutal = calc.calculateExpression(input);
+        assertEquals("2.0", acutal);
     }
 
     @Test
     public void additionOnePlusOnePlusOneEqualsThree(){
         String input = "1+1+1";
-        double actual = calc.calculateExpression(input);
-        assertEquals(3d, actual, DELTA);
+        String actual = calc.calculateExpression(input);
+        assertEquals("3.0", actual);
     }
 
     @Test
     public void multiplyTwoTimesFourEqualsEight(){
         String input = "2*4";
-        double actual = calc.calculateExpression(input);
-        assertEquals(8d, actual, DELTA);
+        String actual = calc.calculateExpression(input);
+        assertEquals("8.0", actual);
     }
     
     @Test
     public void multiplyTwoTimesTwoTimesFourEqualsSixteen() {
     	String input = "2*2*4";
-    	double actual  = calc.calculateExpression(input);
-    	assertEquals(16d, actual, DELTA);
+    	String actual  = calc.calculateExpression(input);
+    	assertEquals("16.0", actual);
     }
 
     @Test
     public void subtractionTwoMinusOneEqualsOne() {
     	String input = "2-1";
-    	double actual = calc.calculateExpression(input);
-    	assertEquals (1d, actual, DELTA);
+    	String actual = calc.calculateExpression(input);
+    	assertEquals ("1.0", actual);
     }
     
     @Test
     public void subtractionThreeMinusOneMinusOneEqualsOne() {
     	String input = "3-1-1";
-    	double actual = calc.calculateExpression(input);
-    	assertEquals (1d, actual, DELTA);
+    	String actual = calc.calculateExpression(input);
+    	assertEquals ("1.0", actual);
     }
     
     @Test
     public void divisionSixDividedByTwoEqualsThree() {
     	String input = "6/2";
-    	double actual = calc.calculateExpression(input);
-    	assertEquals (3d, actual, DELTA);
+    	String actual = calc.calculateExpression(input);
+    	assertEquals ("3.0", actual);
     }
     
     @Test
     public void divisionTwentyByTwoByFiveEqualsTwo() {
     	String input = "20/2/5";
-    	double actual = calc.calculateExpression(input);
-    	assertEquals (2d, actual, DELTA);
+    	String actual = calc.calculateExpression(input);
+    	assertEquals ("2.0", actual);
     }
     
     @Ignore
@@ -96,31 +94,31 @@ public class CalculatorEasyTests{
     @Parameters({
     	"3,3,3,3,3,3"
 	})
-    public void featureTests(String a, String b, String c, String d, String e, double expected) {
+    public void featureTests(String a, String b, String c, String d, String e, String expected) {
     	String input = a+"*"+b+"/"+c+"+"+d+"-"+e;
-    	double actual = calc.calculateExpression(input);
-    	assertEquals(expected, actual, DELTA);
+    	String actual = calc.calculateExpression(input);
+    	assertEquals(expected, actual);
     	//fler asserts!
     }
     
     @Test
     public void testAdditionMultiplyInRinghtOrder(){
         String input = "4*5+3";
-        double actual = calc.calculateExpression(input);
-        assertEquals(23d, actual, DELTA);
+        String actual = calc.calculateExpression(input);
+        assertEquals("23.0", actual);
     }
     
     @Test
     public void testSubtractionMultiplyInRightOrder() {
     	String input = "50-2*5";
-    	double actual = calc.calculateExpression(input);
-    	assertEquals(40d, actual, DELTA);
+    	String actual = calc.calculateExpression(input);
+    	assertEquals("40.0", actual);
     }
     @Test
     public void testDivisionSubtractionInRightOrder() {
     	String input = "30-10/2";
-    	double actual = calc.calculateExpression(input);
-    	assertEquals(25d, actual, DELTA);
+    	String actual = calc.calculateExpression(input);
+    	assertEquals("25.0", actual);
     }
 
     

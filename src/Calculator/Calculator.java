@@ -1,31 +1,31 @@
 package Calculator;
 
 public class Calculator {
-    public double calculateExpression(String input) {
-
+    public String calculateExpression(String input) {
+//Double in = Double.valueOf(input);
         if(input.contains("+")) {
-            return addition(input);
+            return String.valueOf(addition(input));
         }
         if(input.contains("-")) {
-        	return subtraction(input);
+        	return String.valueOf(subtraction(input));
         }
         if(input.contains("/")) {
-        	return division(input);
+        	return String.valueOf(division(input));
         }
         if(input.contains("*")){
-            return multiply(input);
+            return String.valueOf(multiply(input));
         }
         
         if(input.matches("[0-9]+")) {
-            return Double.parseDouble(input);
+            return String.valueOf(input);
         }
-
-    return Double.NaN;
+    String nan = String.valueOf(input+" is not valid");
+    return nan;
     }
 
     private double division(String input) {
     	String[] components = input.split("[/]"); 
-    	return calculateExpression(components[0]) / calculateExpression(components[1]);
+    	return Double.parseDouble(calculateExpression(components[0])) / Double.parseDouble(calculateExpression(components[1]));
     	/*
     	double total = Double.parseDouble(components[0]);
     	while(input.contains("/")){ 
@@ -50,7 +50,7 @@ public class Calculator {
     	 double total = Double.parseDouble(components[0]) + Double.parseDouble(components[0]);
          
          for(String component : components) {
-             total -= calculateExpression(component);
+             total -= Double.parseDouble(calculateExpression(component));
          }
          return total;
 		
@@ -61,7 +61,7 @@ public class Calculator {
         double total = 0.0;
         
         for(String component : components) {
-            total += calculateExpression(component);
+            total += Double.parseDouble(calculateExpression(component));
         }
         return total;
     }
@@ -72,7 +72,7 @@ public class Calculator {
     	double total = 1.0;
     	
     	for(String component : components) {
-    		total *= calculateExpression(component);
+    		total *= Double.parseDouble(calculateExpression(component));
 
     	}
     	return total;

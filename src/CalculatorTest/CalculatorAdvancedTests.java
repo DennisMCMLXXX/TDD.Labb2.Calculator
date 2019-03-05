@@ -21,8 +21,8 @@ public class CalculatorAdvancedTests {
 	@Test
 	public void test() {
 		String input = "2+5-6*3/5";
-		double actual = calc.calculateExpression(input);
-		assertEquals(3.4,actual, DELTA);
+		String actual = calc.calculateExpression(input);
+		assertEquals("3.4",actual, DELTA);
 		
 	}
 }
