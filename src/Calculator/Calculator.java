@@ -26,7 +26,6 @@ int z = 0;
 
 			for (int i = 0; i < exp.length; i++) {
 				String[] temp = exp[i].split("(?=[*/%+-])");
-				//splitExpression.add(temp[0]);
 				for (String x: temp) {
 					splitExpression.add(x);
 				}
