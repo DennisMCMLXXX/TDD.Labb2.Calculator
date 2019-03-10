@@ -64,6 +64,16 @@ int z = 0;
 				sort(toEvaluate);
 				return evaluate(toEvaluate);
 		} 
+		for(int i = 0; i < toEvaluate.size(); i++)
+			if(toEvaluate.get(i).contains("/")){
+				x = Double.parseDouble(toEvaluate.get(i - 1));
+				y = Double.parseDouble(toEvaluate.get(i + 1));
+
+				total = division(x, y);
+				z=i;
+				sort(toEvaluate);
+				return evaluate(toEvaluate);
+		}
 		
 	for(int i = 0; i < toEvaluate.size(); i++)
 		if(toEvaluate.get(i).contains("+")){
@@ -99,7 +109,9 @@ int z = 0;
 		return sort;
 	}
 	
-	
+	private double division(double x1, double x2) {
+		return x1/x2;
+	}
 	private double addition(double x1, double x2) {
 		return x1+x2;
 	}
