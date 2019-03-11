@@ -2,7 +2,6 @@ package Calculator;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class Calculator {
@@ -22,6 +21,9 @@ int z = 0;
 			  return calculateExpression(input.replaceAll(" ", "")); */
 			 throw new ArithmeticException("Contains blankspaces!");
 		}
+		 if(input.matches("[A-Za-z]+")) {
+			  throw new ArithmeticException("String can not contain characters");
+		 }
 	
 		 ArrayList<String> splitExpression  = new ArrayList<>();
 
@@ -37,6 +39,12 @@ int z = 0;
 			
 			System.out.print(splitExpression);
 			
+			for(int i = 0; i < splitExpression.size();i++) {
+				if (splitExpression.get(i).matches("[+*/%]") && splitExpression.get(i+1).matches("[+*%/]"))
+					throw new ArithmeticException("Wrong parameter order");
+				if(splitExpression.get(0).matches("[+*%/]"))
+						throw new ArithmeticException("Equation can not start with a parameter");
+			}
 			evaluate(splitExpression);
 	
 	
@@ -122,34 +130,17 @@ int z = 0;
 }
 	}
 	
-
-	/*
-	for(int i = 0; i < toEvaluate.size(); i++)
-		if(toEvaluate.get(i).contains("-")){
-			x = Double.parseDouble(toEvaluate.get(i - 1));
-			y = Double.parseDouble(toEvaluate.get(i + 1));
-			
-			total = subtraction(x, y);
-			z=i;
-			sort(toEvaluate);
-			System.out.println("\nefter sort i - " +toEvaluate + "tot " +total);
-			return evaluate(toEvaluate);
-	}*/
-	
-	
 	return String.valueOf(total);
 	}
 	
-
-
-	private ArrayList<String> sort(ArrayList<String> sort ) {
-		
+	private ArrayList<String> sort(ArrayList<String> sort ) {	
 		sort.set(z-1, String.valueOf(total));
 		sort.remove(z);
 		sort.remove(z);
 		
 		return sort;
 	}
+	
 	private double modulo(double x, double y) {
 		return x%y;
 	}
