@@ -85,7 +85,7 @@ public class CalculatorAdvancedTests {
 	 }
 	 @Test(expected = ArithmeticException.class)
 	 public void containsCharacters() {
-		 String input = "asf";
+		 String input = "sdf";
 		 String actual = calc.calculateExpression(input);
 		 assertEquals("String can not contain characters", actual);
 	 }
@@ -95,5 +95,20 @@ public class CalculatorAdvancedTests {
 		 String input = "*3";
 		 String actual = calc.calculateExpression(input);
 		 assertEquals("Equation can not start with a parameter", actual);
+	 }
+
+	 @Test
+	 public void multiplicationBigNumber() {
+		 String input = "10000000*10000000*10000000";
+		 String actual = calc.calculateExpression(input);
+		 assertEquals("1000000000000000000000,0", actual);
+	 }
+	 
+	 @Test
+	 public void factorialTest(){
+		 String input = "5!";
+		 String actual = calc.calculateExpression(input);
+		 assertEquals("120,0", actual);
+		 
 	 }
 }
