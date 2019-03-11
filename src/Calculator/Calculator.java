@@ -74,6 +74,7 @@ int z = 0;
 				sort(toEvaluate);
 				return evaluate(toEvaluate);
 		}
+		
 		for(int i = 0; i < toEvaluate.size(); i++)
 			if(toEvaluate.get(i).contains("%")){
 				x = Double.parseDouble(toEvaluate.get(i - 1));
@@ -83,9 +84,22 @@ int z = 0;
 				z=i;
 				sort(toEvaluate);
 				return evaluate(toEvaluate);
-		} 
+		}
 		
-	for(int i = 0; i < toEvaluate.size(); i++)
+		for(int i = 0; i < toEvaluate.size(); i++) 
+			if(toEvaluate.get(i).matches("[-]")&& toEvaluate.get(i+1).matches("[-]")) {
+				x = Double.parseDouble(toEvaluate.get(i - 1));
+				y = Double.parseDouble(toEvaluate.get(i + 2));
+				
+				total = addition(x,y);
+				z=i;
+				sort(toEvaluate);
+				System.out.println("\nefter sort i -- " +toEvaluate +"tot " +total);
+
+				return evaluate(toEvaluate);
+			} 
+		
+	for(int i = 0; i < toEvaluate.size(); i++) {
 		if(toEvaluate.get(i).contains("+")){
 			x = Double.parseDouble(toEvaluate.get(i - 1));
 			y = Double.parseDouble(toEvaluate.get(i + 1));
@@ -95,17 +109,21 @@ int z = 0;
 			sort(toEvaluate);
 			System.out.println("\nefter sort i + " +toEvaluate +"tot " +total);
 			return evaluate(toEvaluate);
-	} 
-	for(int i = 0; i < toEvaluate.size(); i++) 
-	if(toEvaluate.get(i).matches("[-]")&& toEvaluate.get(i+1).matches("[-]")) {
+	}
+	if(toEvaluate.get(i).contains("-")){
 		x = Double.parseDouble(toEvaluate.get(i - 1));
 		y = Double.parseDouble(toEvaluate.get(i + 1));
 		
-		total = addition(x,y);
+		total = subtraction(x, y);
 		z=i;
 		sort(toEvaluate);
+		System.out.println("\nefter sort i - " +toEvaluate + "tot " +total);
 		return evaluate(toEvaluate);
-	} 
+}
+	}
+	
+
+	/*
 	for(int i = 0; i < toEvaluate.size(); i++)
 		if(toEvaluate.get(i).contains("-")){
 			x = Double.parseDouble(toEvaluate.get(i - 1));
@@ -116,7 +134,7 @@ int z = 0;
 			sort(toEvaluate);
 			System.out.println("\nefter sort i - " +toEvaluate + "tot " +total);
 			return evaluate(toEvaluate);
-	}
+	}*/
 	
 	
 	return String.valueOf(total);
