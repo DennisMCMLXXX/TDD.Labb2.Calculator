@@ -16,11 +16,5 @@ public class CalculatorFailedTests {
     public void beforeEachTest() {
         calc = new Calculator();
     }
-    @Ignore
-    @Test
-    public void divisionTwentyByTwoByFiveEqualsTwo() {
-    	String input = "20/2/5";
-    	String actual = calc.calculateExpression(input);
-    	assertEquals ("2.0", actual);
-    }
+    
 }

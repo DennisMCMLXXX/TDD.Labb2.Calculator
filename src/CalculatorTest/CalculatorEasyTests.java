@@ -20,31 +20,10 @@ public class CalculatorEasyTests{
     }
    
     @Test
-    public void StringOfOneToDoubleOne(){
-        String input = "1";
-        String actual = calc.calculateExpression(input);
-        assertEquals("1", actual);
-    }
-   
-    @Test
-    public void StringOfTwoGivesDoubleTwo(){
-        String input = "2";
-        String actual = calc.calculateExpression(input);
-        assertEquals("2", actual);
-    }
-    
-    @Test
     public void additionOnePlusOneEqualsTwo(){
         String input = "1+1";
         String acutal = calc.calculateExpression(input);
         assertEquals("2,0", acutal);
-    }
-  
-    @Test
-    public void StringContainsBlankspace() {
-    	String input = " 2+ 2";
-    	String actual = calc.calculateExpression(input);
-    	assertEquals("4,0", actual);
     }
 
   @Test
@@ -68,18 +47,11 @@ public class CalculatorEasyTests{
     	assertEquals ("3,0", actual);
     }
     
-
-    
-    @Ignore
     @Test
-    @Parameters({
-    	"3,3,3,3,3,3"
-	})
-    public void featureTests(String a, String b, String c, String d, String e, String expected) {
-    	String input = a+"*"+b+"/"+c+"+"+d+"-"+e;
+    public void moduloSixModuloFourEqualsTwo() {
+    	String input = "6%4";
     	String actual = calc.calculateExpression(input);
-    	assertEquals(expected, actual);
-    	//fler asserts!
+    	assertEquals ("2,0", actual);
     }
     
     @Test

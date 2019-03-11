@@ -32,10 +32,22 @@ public class CalculatorMediumTests {
 	    }
 	 
 	 @Test
-	 public void test() {
-		 String input = "2*3*4*5";
+	 public void multiplationTwoTimesThreeTimesFourEquals24() {
+		 String input = "2*3*4";
 		 String actual = calc.calculateExpression(input);
-	 	 assertEquals("120,0",actual);
-			
+	 	 assertEquals("24,0",actual);	
 		}
+	 @Test
+	 public void divisionFiftyByTwoByFiveEqualsFive() {
+		 String input = "50/2/5";
+		 String actual = calc.calculateExpression(input);
+		 assertEquals("5,0", actual);
+	 }
+	 @Test
+	 public void divisionTenByThreeEqualsThreePointThreeRounded(){
+		 String input = "10/3";
+		 String actual = calc.calculateExpression(input);
+		 assertEquals("3,3", actual);
+	 }
+	
 }
