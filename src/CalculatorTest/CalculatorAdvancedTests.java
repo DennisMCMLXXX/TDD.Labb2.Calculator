@@ -21,7 +21,12 @@ public class CalculatorAdvancedTests {
 	 public void beforeEachTest() {
 	 calc = new Calculator();
 	 }
-	
+	 
+	/**
+	 * Anledningen till att det är flera test´s och inte ett med @Parameters är att jag har en avrundare
+	 * som lägger till ",0" som förväntat resultat. Det hade gått att lösa genom en regex men nu blev
+	 * det såhär istället.
+	 */
 	@Test
 	public void featureTestNrOne() {
 		String input = "5*4+7-3*0+4-10";
@@ -112,7 +117,7 @@ public class CalculatorAdvancedTests {
 	 public void emptyString() {
 		 String input = "";
 		 String actual = calc.calculateExpression(input);
-		 assertEquals("String must contain mathematic equation", actual);
+		 assertEquals("String is empty", actual);
 	 }
 	 
 	 @Test

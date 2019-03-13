@@ -10,43 +10,53 @@ double total = 0;
 int z = 0;
 
 	public String calculateExpression(String input) {
-
+		
+		//kontrollerar att det finns något matematiskt utttyck
 		 if(input.matches("[0-9]+") && !input.contains("(?<=[!*/%+-])")) 
 			  throw new ArithmeticException("Mathematic expression needed");
-			// return input;
 		 
+		 /**
+		  * kontrollerar om det finns mellanslag, om det finns säger den till. Möjlighet att lösa det finns
+		  * i if-satsen.
+		  */
 		 if (input.contains(" ")) 
 			 /**
 			  * Denna return löser problemet med mellanslag i input. Men kravspecen var att returnera ett felmeddelande.
 			  return calculateExpression(input.replaceAll(" ", "")); */
 			 throw new ArithmeticException("Contains blankspaces!");
 		
-			if(input.isEmpty())
-				throw new ArithmeticException("String must contain mathematic equation");
+		 //kontrollerar att den inte är tom
+		 if(input.isEmpty())
+			 throw new ArithmeticException("String is empty");
 			
-	
-		 ArrayList<String> splitExpression  = new ArrayList<>();
-
-			String[] exp = input.split("(?<=[!*/%+-])");
 		 
-
-			for (int i = 0; i < exp.length; i++) {
-				String[] temp = exp[i].split("(?=[!*/%+-])");
+		 ArrayList<String> splitExpression  = new ArrayList<>();
+		 String[] exp = input.split("(?<=[!*/%+-])");
+		 
+		 //den delade strängen har blivit en arraylsita som fylls på
+		 for (int i = 0; i < exp.length; i++) {
+			String[] temp = exp[i].split("(?=[!*/%+-])");
 				for (String x: temp) {
 					splitExpression.add(x);
 				}
 			}
 			
-			System.out.print(splitExpression);
+		 	//har denna för att kontrollerat hur stärngen är efter delningen.
+			//System.out.print(splitExpression);
 			
+		 	//Arraylistan skickas till wash metoden som kontrollerar innehållet
 			wash(splitExpression);
+			//om allt är ok skickas den vidare till evaluate där den kalkylerar innehållet
 			evaluate(splitExpression);
 	
-	
+		/**
+		  *Avrundar till ett decimaltal, går att ställa hur mågna man vill ha.
+		  *Jag har ej löst en kontroll att kontrollera om det finns tex mer än 5 decimaler
+		  *att bara avrunda det. Men med denna metod räknar den med max antal decimaler under uträkningarna.  	
+		  */
 		 DecimalFormat decimalFormat = new DecimalFormat("#.0");
 		 String numberAsString = decimalFormat.format(total);
 		 System.out.println(numberAsString);
-		 //return String.valueOf(total);
     	return numberAsString; 
     }
 	
