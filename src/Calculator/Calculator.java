@@ -11,26 +11,27 @@ int z = 0;
 
 	public String calculateExpression(String input) {
 
-		 if(input.matches("[0-9]+") && !input.contains("(?<=[*/%+-!])")) {
+		 if(input.matches("[0-9]+") && !input.contains("(?<=[!*/%+-])")) 
 			  throw new ArithmeticException("Mathematic expression needed");
 			// return input;
-		 }
-		 if (input.contains(" ")) {
+		 
+		 if (input.contains(" ")) 
 			 /**
 			  * Denna return löser problemet med mellanslag i input. Men kravspecen var att returnera ett felmeddelande.
 			  return calculateExpression(input.replaceAll(" ", "")); */
 			 throw new ArithmeticException("Contains blankspaces!");
-		}
-		 if(input.matches("[A-Za-z]+")) 
-			  throw new ArithmeticException("String can not contain characters");
+		
+			if(input.isEmpty())
+				throw new ArithmeticException("String must contain mathematic equation");
+			
 	
 		 ArrayList<String> splitExpression  = new ArrayList<>();
 
-			String[] exp = input.split("(?<=[*/%+-!])");
+			String[] exp = input.split("(?<=[!*/%+-])");
 		 
 
 			for (int i = 0; i < exp.length; i++) {
-				String[] temp = exp[i].split("(?=[*/%+-!])");
+				String[] temp = exp[i].split("(?=[!*/%+-])");
 				for (String x: temp) {
 					splitExpression.add(x);
 				}
@@ -62,6 +63,7 @@ int z = 0;
 				System.out.println("\nefter sort i ! " +toEvaluate);
 				return evaluate(toEvaluate);
 		} 
+		
 		for(int i = 0; i < toEvaluate.size(); i++)
 			if(toEvaluate.get(i).contains("*")){
 				x = Double.parseDouble(toEvaluate.get(i - 1));
@@ -73,6 +75,7 @@ int z = 0;
 				System.out.println("\nefter sort i * " +toEvaluate);
 				return evaluate(toEvaluate);
 		} 
+		
 		for(int i = 0; i < toEvaluate.size(); i++)
 			if(toEvaluate.get(i).contains("/")){
 				x = Double.parseDouble(toEvaluate.get(i - 1));
@@ -84,6 +87,7 @@ int z = 0;
 				total = division(x, y);
 				z=i;
 				sort(toEvaluate);
+				System.out.println("\nefter sort i / " +toEvaluate);
 				return evaluate(toEvaluate);
 		}
 		
@@ -111,7 +115,7 @@ int z = 0;
 				return evaluate(toEvaluate);
 			} 
 		
-	for(int i = 0; i < toEvaluate.size(); i++) {
+	for(int i = 1; i < toEvaluate.size(); i++) {
 		if(toEvaluate.get(i).contains("+")){
 			x = Double.parseDouble(toEvaluate.get(i - 1));
 			y = Double.parseDouble(toEvaluate.get(i + 1));
@@ -153,8 +157,11 @@ int z = 0;
 				throw new ArithmeticException("Equation can not start with a parameter");
 			if(wash.get(i).matches("[A-Za-z]+")) 
 				throw new ArithmeticException("String can not contain characters");
-		
+			if(wash.get(wash.size()-1).matches("[+*%/]+"))
+				throw new ArithmeticException("Equation can not end with a parameter");
+			
 		}
+	
 		return wash;
 	}
 	/**

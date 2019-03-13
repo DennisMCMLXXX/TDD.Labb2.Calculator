@@ -35,6 +35,13 @@ public class CalculatorAdvancedTests {
 		assertEquals("32,5",actual);
 	}
 	
+	@Test
+	public void featureTestNrThree() {
+		String input = "5+9-8*90/3+6!";
+		String actual = calc.calculateExpression(input);
+		assertEquals("494,0",actual);
+	}
+	
 	 @Test(expected = ArithmeticException.class)
 	 public void testTwoEmptyTwoThrowsArithmeticExpression() {
 		 String input = "2 2";
@@ -55,16 +62,15 @@ public class CalculatorAdvancedTests {
 		  String actual = calc.calculateExpression(input);
 		  assertEquals("Contains blankspaces!", actual);
 	    }
-	  
+	
 	    @Test(expected = ArithmeticException.class)
 	    @Parameters({
-	    	"3, +, +, 5, Wrong parameter order",
-	    	"*, +, 6, 5, Wrong parameter order",
-	    	"*, *, 6, 5, Wrong parameter order",
-	    	"3, 9, /, /, Wrong parameter order"
+	    	"3++5, Wrong parameter order",
+	    	"*+6-5, Wrong parameter order",
+	    	"**65, Wrong parameter order",
+	    	"39//, Wrong parameter order"
 		})
-	    public void featureTestParameters(String a, String b, String c, String d, String expected) {
-	    	String input = a+b+c+d;
+	    public void featureTestParameters(String input, String expected) {
 	    	String actual = calc.calculateExpression(input);
 	    	assertEquals(expected, actual);
 	    }
@@ -76,7 +82,7 @@ public class CalculatorAdvancedTests {
 		 assertEquals ("9,0", actual);
 	 }
 	 
-	 //extra test då featureTestParameters har krånglat en hel del
+	 //extra test då featureTestParameters har krånglat en del för mig i eclipse
 	 @Test(expected = ArithmeticException.class)
 	 public void twoWrongParameters () {
 		 String input = "3++4";
@@ -96,19 +102,38 @@ public class CalculatorAdvancedTests {
 		 String actual = calc.calculateExpression(input);
 		 assertEquals("Equation can not start with a parameter", actual);
 	 }
-
+	 @Test(expected = ArithmeticException.class)
+	 public void parameterLast() {
+		 String input = "3*";
+		 String actual = calc.calculateExpression(input);
+		 assertEquals("Equation can not end with a parameter", actual);
+	 }
+	 @Test(expected = ArithmeticException.class)
+	 public void emptyString() {
+		 String input = "";
+		 String actual = calc.calculateExpression(input);
+		 assertEquals("String must contain mathematic equation", actual);
+	 }
+	 
 	 @Test
 	 public void multiplicationBigNumber() {
 		 String input = "10000000*10000000*10000000";
 		 String actual = calc.calculateExpression(input);
 		 assertEquals("1000000000000000000000,0", actual);
 	 }
-	 
+	  
 	 @Test
 	 public void factorialTest(){
 		 String input = "5!";
 		 String actual = calc.calculateExpression(input);
 		 assertEquals("120,0", actual);
+	 }
+	 
+	 @Test
+	 public void factorialWithOthers() {
+		 String input = "5*5+5!";
+		 String actual = calc.calculateExpression(input);
+		 assertEquals("145,0", actual);
 		 
 	 }
 }
