@@ -1,7 +1,6 @@
 package CalculatorTest;
 
 import Calculator.Calculator;
-import Calculator.CalculatorTWO;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 

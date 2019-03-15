@@ -56,13 +56,21 @@ int z = 0;
 		  */
 		 DecimalFormat decimalFormat = new DecimalFormat("#.0");
 		 String numberAsString = decimalFormat.format(total);
-		 System.out.println(numberAsString);
+		// System.out.println(numberAsString);
     	return numberAsString; 
     }
 	
+	/**
+	 * Metoden som räknar allt och i rätt ordning. Den börjar uppifrån och går nedåt
+	 * när den räknat tex * delen av ekvationen skickar den tillbaka den resterande
+	 * strängen till evaluate metoden tills den gått till slutet. 
+	 */ 
 	private String evaluate (ArrayList<String> toEvaluate) {
 		double x, y;
 		
+
+		
+		//tog med faktorisering bara för att testa då den är uppbyggd på ett lite annat sätt 
 		for(int i = 0; i < toEvaluate.size(); i++)
 			if(toEvaluate.get(i).contains("!")){
 				x = Double.parseDouble(toEvaluate.get(i - 1));
@@ -70,10 +78,15 @@ int z = 0;
 				total = factorial(x);
 				toEvaluate.set(i-1, String.valueOf(total));
 				toEvaluate.remove(i);
-				System.out.println("\nefter sort i ! " +toEvaluate);
 				return evaluate(toEvaluate);
 		} 
-		
+		/**
+		 * fungerar så att den tar arrayvärdet före och efter "*" gör om det till
+		 * doubles och skickar det till multiply metoden.
+		 * int z sätts till samma nummer som i för sort metodens skull
+		 * evaluate metoden klipper till strängen.
+		 * returnerar till evaluate
+		 */ 
 		for(int i = 0; i < toEvaluate.size(); i++)
 			if(toEvaluate.get(i).contains("*")){
 				x = Double.parseDouble(toEvaluate.get(i - 1));
@@ -82,7 +95,6 @@ int z = 0;
 				total = multiply(x, y);
 				z=i;
 				sort(toEvaluate);
-				System.out.println("\nefter sort i * " +toEvaluate);
 				return evaluate(toEvaluate);
 		} 
 		
@@ -91,13 +103,13 @@ int z = 0;
 				x = Double.parseDouble(toEvaluate.get(i - 1));
 				y = Double.parseDouble(toEvaluate.get(i + 1));
 				
-				if(y==0)
-					 throw new ArithmeticException("You can not divide by zero!");
-
+				if(y==0) {
+					System.out.println("You can not divide by zero! ");
+					throw new ArithmeticException("You can not divide by zero!");
+				}
 				total = division(x, y);
 				z=i;
 				sort(toEvaluate);
-				System.out.println("\nefter sort i / " +toEvaluate);
 				return evaluate(toEvaluate);
 		}
 		
@@ -112,6 +124,7 @@ int z = 0;
 				return evaluate(toEvaluate);
 		}
 		
+		//-- loop som kontrollerar om två - är efter varandra och skickar i så fall till additionsmetoden
 		for(int i = 0; i < toEvaluate.size(); i++) 
 			if(toEvaluate.get(i).matches("[-]")&& toEvaluate.get(i+1).matches("[-]")) {
 				x = Double.parseDouble(toEvaluate.get(i - 1));
@@ -120,37 +133,40 @@ int z = 0;
 				total = addition(x,y);
 				z=i;
 				sort(toEvaluate);
-				System.out.println("\nefter sort i -- " +toEvaluate +"tot " +total);
-
 				return evaluate(toEvaluate);
 			} 
+	
 		
-	for(int i = 1; i < toEvaluate.size(); i++) {
-		if(toEvaluate.get(i).contains("+")){
-			x = Double.parseDouble(toEvaluate.get(i - 1));
-			y = Double.parseDouble(toEvaluate.get(i + 1));
+		//int i = 1 här för ett tal kan tex vara -241 som svar och ska då ej gå genom denna loop
+		for(int i = 1; i < toEvaluate.size(); i++) {
+			if(toEvaluate.get(i).contains("+")){
+				x = Double.parseDouble(toEvaluate.get(i - 1));
+				y = Double.parseDouble(toEvaluate.get(i + 1));
 
-			total = addition(x, y);
-			z=i;
-			sort(toEvaluate);
-			System.out.println("\nefter sort i + " +toEvaluate +"tot " +total);
-			return evaluate(toEvaluate);
-	}
-	if(toEvaluate.get(i).contains("-")){
-		x = Double.parseDouble(toEvaluate.get(i - 1));
-		y = Double.parseDouble(toEvaluate.get(i + 1));
-		
-		total = subtraction(x, y);
-		z=i;
-		sort(toEvaluate);
-		System.out.println("\nefter sort i - " +toEvaluate + "tot " +total);
-		return evaluate(toEvaluate);
-}
+				total = addition(x, y);
+				z=i;
+				sort(toEvaluate);
+				return evaluate(toEvaluate);
+			}
+			if(toEvaluate.get(i).contains("-")){
+				x = Double.parseDouble(toEvaluate.get(i - 1));
+				y = Double.parseDouble(toEvaluate.get(i + 1));
+				total = subtraction(x, y);
+				z=i;
+				sort(toEvaluate);
+				return evaluate(toEvaluate);
+			}
 	}
 	
 	return String.valueOf(total);
 	}
 	
+
+	/**
+	 * Klippa å klistra metod som tar z (vilet tex har index där * är)
+	 * sätter nya total värdet på -1 och raderar de två framför. 
+	 * tex 4 * 5: 4 ersätts med nya total, * och 5 raderas.
+	 */ 
 	private ArrayList<String> sort(ArrayList<String> sort ) {	
 		sort.set(z-1, String.valueOf(total));
 		sort.remove(z);
@@ -159,16 +175,28 @@ int z = 0;
 		return sort;
 	}
 	
+	/**
+	 * Metoden wash kontrollerar strängen innan den gått till evaluate metoden och kastar felmeddelanden.
+	 * Inte helt nöjd här då det finns vissa regler kvar att kontrollera som tex E (för att nå overflow)
+	 */ 
 	private ArrayList<String> wash (ArrayList<String> wash){
 		for(int i = 0; i < wash.size();i++) {
-			if (wash.get(i).matches("[+*/%]") && wash.get(i+1).matches("[+*%/]"))
+			if (wash.get(i).matches("[+*/%]") && wash.get(i+1).matches("[+*%/!]")) {
+				System.out.println("Wrong parameter order! ");
 				throw new ArithmeticException("Wrong parameter order");
-			if(wash.get(0).matches("[+*%/]"))
+			}
+			if(wash.get(0).matches("[-+*%/]")) {
+				System.out.println("Equation can not start with a parameter! ");
 				throw new ArithmeticException("Equation can not start with a parameter");
-			if(wash.get(i).matches("[A-Za-z]+")) 
+			}
+			if(wash.get(i).matches("[A-DF-Za-z]+")) {
+				System.out.println("String can not contain characters! ");
 				throw new ArithmeticException("String can not contain characters");
-			if(wash.get(wash.size()-1).matches("[+*%/]+"))
+			}
+			if(wash.get(wash.size()-1).matches("[+*%/]+")) {
+				System.out.println("Equation can not end with a parameter! ");
 				throw new ArithmeticException("Equation can not end with a parameter");
+			}
 			
 		}
 	
@@ -193,6 +221,7 @@ int z = 0;
 	public double multiply(double x, double y) {
 		return x*y;
 	}
+	//faktorial har jag fått till som ren recursion metod. 
 	public double factorial(double x) {
 		if(x<=1)
 			return 1;

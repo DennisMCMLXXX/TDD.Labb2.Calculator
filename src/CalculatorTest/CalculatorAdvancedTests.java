@@ -100,7 +100,18 @@ public class CalculatorAdvancedTests {
 		 String actual = calc.calculateExpression(input);
 		 assertEquals("String can not contain characters", actual);
 	 }
-	 
+	 /**
+	  * jag började jobba med att hantera negativa input tal men fick inte till det
+	  * istället hanterar den - som ett matematiskt uttryck.
+	  * Jag är lite besviken på mig själv att jag inte löste det i tid.
+	  * Men tidsmässigt vill jag lägga mer tid på grupparbetet.
+	  */
+	@Test(expected = ArithmeticException.class)
+	public void subtractionMinusTenMinus2EqualsMinusTwelve() {
+		String input = "-10-2";
+		String actual = calc.calculateExpression(input);
+		assertEquals("Equation can not start with a parameter", actual);		
+	}
 	 @Test(expected = ArithmeticException.class)
 	 public void parameterFirst() {
 		 String input = "*3";
@@ -138,7 +149,7 @@ public class CalculatorAdvancedTests {
 	 public void factorialWithOthers() {
 		 String input = "5*5+5!";
 		 String actual = calc.calculateExpression(input);
-		 assertEquals("145,0", actual);
-		 
+		 assertEquals("145,0", actual);	 
 	 }
+	
 }

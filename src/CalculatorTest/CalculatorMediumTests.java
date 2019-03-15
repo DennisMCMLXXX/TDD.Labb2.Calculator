@@ -24,6 +24,7 @@ public class CalculatorMediumTests {
 		 String actual = calc.calculateExpression(input);
 		 assertEquals("3,0", actual);
 	    }
+	 
 	 @Test
 	 public void subtractionFiftyfivemMinusFiveMinusEightEqualsFoutytwo(){
 		 String input = "55-5-8";
@@ -37,17 +38,19 @@ public class CalculatorMediumTests {
 		 String actual = calc.calculateExpression(input);
 	 	 assertEquals("24,0",actual);	
 		}
+	 
 	 @Test
 	 public void divisionFiftyByTwoByFiveEqualsFive() {
 		 String input = "50/2/5";
 		 String actual = calc.calculateExpression(input);
 		 assertEquals("5,0", actual);
 	 }
+	 
 	 @Test
 	 public void divisionTenByThreeEqualsThreePointThreeRounded(){
 		 String input = "10/3";
 		 String actual = calc.calculateExpression(input);
 		 assertEquals("3,3", actual);
 	 }
-	
+
 }
