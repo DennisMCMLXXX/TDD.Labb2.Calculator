@@ -4,6 +4,7 @@ import Calculator.Calculator;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -101,18 +102,31 @@ public class CalculatorAdvancedTests {
 		 assertEquals("String can not contain characters", actual);
 	 }
 	 /**
-	  * jag började jobba med att hantera negativa input tal men fick inte till det
-	  * istället hanterar den - som ett matematiskt uttryck.
-	  * Jag är lite besviken på mig själv att jag inte löste det i tid.
-	  * Men tidsmässigt vill jag lägga mer tid på grupparbetet.
+	  * Jag började med att hantera som ett fel i ekvationen men hanterade felet i ekavtionen istället
 	  */
+	@Ignore 
 	@Test(expected = ArithmeticException.class)
-	public void subtractionMinusTenMinus2EqualsMinusTwelve() {
+	public void subtractionMinusTenMinus2EqualsMinusTwelveException() {
 		String input = "-10-2";
 		String actual = calc.calculateExpression(input);
 		assertEquals("Equation can not start with a parameter", actual);		
 	}
-	 @Test(expected = ArithmeticException.class)
+	
+	@Test
+	public void subtractionMinusTenMinus2EqualsMinusTwelve() {
+		String input = "-10-2";
+		String actual = calc.calculateExpression(input);
+		assertEquals("−12,0", actual);		
+	}
+	
+	@Test
+	public void additionMinusTwentyPlusTenEquals10() {
+		String input = "-20+10";
+		String actual = calc.calculateExpression(input);
+		assertEquals("−10,0", actual);
+	}
+
+	@Test(expected = ArithmeticException.class)
 	 public void parameterFirst() {
 		 String input = "*3";
 		 String actual = calc.calculateExpression(input);

@@ -2,6 +2,7 @@ package Calculator;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Calculator {
@@ -68,7 +69,45 @@ int z = 0;
 	private String evaluate (ArrayList<String> toEvaluate) {
 		double x, y;
 		
-
+		/**
+		 * Denna if-sats kontrollerar om det är ett - i början av ekvationen
+		 * Jag är inte helt nöjd med den då den är väldigt stökig  och lite för många metoder.
+		 * Men den fungerar och gör sitt jobb. Fick anvnäda mig av flera olika metoder då jag inte
+		 * kom på något bra sätt att kombinera två index av en array till en index, att merga ihop dom på ett bra sätt.
+		 * Därför den är lite väl lång. 
+		 * Den tar ArrayList toEvaluate och gör om den till en sträng och delar den på nytt till en ArrayList, fast utan "-". 
+		 * Sedan tar den index 0 på den nya ArrayList och ersätter index 0 och 1 i den gamla. på så sätt hanterar den
+		 * [-10] som ett tal då det tidigare hade blivit [-] [10]
+		 */ 
+		if (toEvaluate.get(0).matches("[-]")&& toEvaluate.get(3).matches("[0-9]+")) {
+			String delimiter = "";
+			StringBuilder sb = new StringBuilder();
+			for ( String element : toEvaluate ) {
+			    if (sb.length() > 0) {
+			        sb.append( delimiter );
+			    }
+			    sb.append( element );
+			}
+			
+			String tempstring = sb.toString();
+		//	System.out.println("tempstring" +theString );
+			 ArrayList<String> temp1  = new ArrayList<>();
+			 String[] exp = tempstring.split("(?<=[!*/%+])");
+			 
+			 for (int i = 0; i < exp.length; i++) {
+				String[] temp = exp[i].split("(?=[!*/%+-])");
+					for (String xa: temp) {
+						temp1.add(xa);
+					}
+				}
+		//	 System.out.println("temp1"+temp1);
+			 toEvaluate.set(0, temp1.get(0));
+			 toEvaluate.remove(1);
+		//	 System.out.println("Nya toE" +toEvaluate);
+			 
+			 evaluate(toEvaluate);
+			 
+		}
 		
 		//tog med faktorisering bara för att testa då den är uppbyggd på ett lite annat sätt 
 		for(int i = 0; i < toEvaluate.size(); i++)
@@ -185,7 +224,7 @@ int z = 0;
 				System.out.println("Wrong parameter order! ");
 				throw new ArithmeticException("Wrong parameter order");
 			}
-			if(wash.get(0).matches("[-+*%/]")) {
+			if(wash.get(0).matches("[+*%/]")) {
 				System.out.println("Equation can not start with a parameter! ");
 				throw new ArithmeticException("Equation can not start with a parameter");
 			}
@@ -193,7 +232,7 @@ int z = 0;
 				System.out.println("String can not contain characters! ");
 				throw new ArithmeticException("String can not contain characters");
 			}
-			if(wash.get(wash.size()-1).matches("[+*%/]+")) {
+			if(wash.get(wash.size()-1).matches("[-+*%/]+")) {
 				System.out.println("Equation can not end with a parameter! ");
 				throw new ArithmeticException("Equation can not end with a parameter");
 			}
