@@ -18,7 +18,9 @@ public class CalculatorFailedTests {
     }
     
     /**
-     * Jag vet inte riktigt varför detta test inte säger att den
+     * Jag vet inte riktigt varför detta test inte säger att den innehåller ett A och 
+     * ger ett ArithmeticException. Funderar på om det är pga att strängen inte delas upp men 
+     * jag vet inte riktigt.
      */
     @Ignore
     @Test(expected = ArithmeticException.class)

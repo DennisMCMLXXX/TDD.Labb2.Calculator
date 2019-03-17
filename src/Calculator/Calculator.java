@@ -30,7 +30,11 @@ int z = 0;
 		 if(input.isEmpty())
 			 throw new ArithmeticException("String is empty");
 			
-		 
+		 //om den innehåller paranteser
+		 if(input.contains("(") || input.contains(")")) {
+				System.out.println("String can not contain parentheses! ");
+				throw new ArithmeticException("String can not contain parentheses");
+			}
 		 ArrayList<String> splitExpression  = new ArrayList<>();
 		 String[] exp = input.split("(?<=[!*/%+-])");
 		 

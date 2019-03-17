@@ -101,6 +101,14 @@ public class CalculatorAdvancedTests {
 		 String actual = calc.calculateExpression(input);
 		 assertEquals("String can not contain characters", actual);
 	 }
+	 
+	 @Test(expected = ArithmeticException.class)
+	 public void containsParentheses() {
+		 String input = "5(4+4)";
+		 String actual = calc.calculateExpression(input);
+		 assertEquals("String can not contain parentheses", actual);
+	 }
+	 
 	 /**
 	  * Jag började med att hantera som ett fel i ekvationen men hanterade felet i ekavtionen istället
 	  */
